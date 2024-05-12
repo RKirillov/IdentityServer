@@ -7,7 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+//кто запрашивает
 builder.Services.AddAuthentication("Bearer")
+    //указываем используемый identity server
             .AddJwtBearer("Bearer", options =>
             {
                 options.Authority = "https://localhost:5001";
@@ -17,6 +19,7 @@ builder.Services.AddAuthentication("Bearer")
                     ValidateAudience = false
                 };
             });
+//проверка к каким скопам он имеет права, тот кто запрашивает.
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("ApiScope", policy =>
