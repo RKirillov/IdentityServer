@@ -3,7 +3,7 @@ using IdentityModel.Client;
 using Newtonsoft.Json.Linq;
 
 var client = new HttpClient();
-
+//ждай настройку идентити сервера
 var disco = await client.GetDiscoveryDocumentAsync("https://localhost:5001");
 if (disco.IsError)
 {
@@ -12,8 +12,10 @@ if (disco.IsError)
 }
 
 // request token
+//получаем токен от идентити сервера
 var tokenResponse = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
 {
+    //прописан в config.cs identity serverа, список клиентов
     Address = disco.TokenEndpoint,
     ClientId = "first-client",
     ClientSecret = "secret",
@@ -31,6 +33,7 @@ Console.WriteLine(tokenResponse.Json);
 Console.WriteLine("\n\n");
 
 // call api
+// обращаемся к апишке, передаем токен, разреши нам запрос
 var apiClient = new HttpClient();
 apiClient.SetBearerToken(tokenResponse.AccessToken);
 

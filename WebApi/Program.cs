@@ -20,6 +20,7 @@ builder.Services.AddAuthentication("Bearer")
                 };
             });
 //проверка к каким скопам он имеет права, тот кто запрашивает.
+// проверка токена от клиента
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("ApiScope", policy =>
