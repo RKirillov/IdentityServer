@@ -24,7 +24,7 @@ namespace IdentityServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            //авториазция
+            //скорее про авториазция
             var builder = services.AddIdentityServer()
                 .AddInMemoryIdentityResources(Config.IdentityResources)
                 .AddInMemoryApiScopes(Config.ApiScopes)
@@ -33,15 +33,17 @@ namespace IdentityServer
 
             // not recommended for production - you need to store your key material somewhere secure
             builder.AddDeveloperSigningCredential();
-            //аутентификация
+            //аутентификация часть openid connect
             services.AddAuthentication()
+                //через гугл
                 .AddGoogle("Google", options =>
                 {
                     options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
 
-                    options.ClientId = "<insert here>";
+                    options.ClientId = "<insert here>";//пойти в гугл консоль, зарегить свое приложение, секюрно сюда вставить
                     options.ClientSecret = "<insert here>";
                 })
+                //свой собственный identity сервер
                 .AddOpenIdConnect("oidc", "Demo IdentityServer", options =>
                 {
                     options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
@@ -51,7 +53,7 @@ namespace IdentityServer
                     options.Authority = "https://demo.identityserver.io/";
                     options.ClientId = "interactive.confidential";
                     options.ClientSecret = "secret";
-                    options.ResponseType = "code";
+                    options.ResponseType = "code";//тип ответа
 
                     options.TokenValidationParameters = new TokenValidationParameters
                     {

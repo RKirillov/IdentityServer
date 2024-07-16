@@ -10,6 +10,7 @@ namespace IdentityServer
 {
     public static class Config
     {
+        //используем как identity ресурс, куда может быть доступ.
         public static IEnumerable<IdentityResource> IdentityResources =>
             new IdentityResource[]
             { 
@@ -17,13 +18,13 @@ namespace IdentityServer
                 new IdentityResources.Profile(),
             };
 
-        public static IEnumerable<ApiScope> ApiScopes =>
+        public static IEnumerable<ApiScope> ApiScopes =>// 
             new List<ApiScope>
             { 
                 new ApiScope("test-api", "My test Api")
             };
 
-        public static IEnumerable<Client> Clients =>
+        public static IEnumerable<Client> Clients =>//те клиенты о которых identity server знает
             new List<Client> 
             { 
                 new Client
@@ -31,14 +32,14 @@ namespace IdentityServer
                     ClientId = "first-client",
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     ClientSecrets = { new Secret("secret".Sha256())},
-                    AllowedScopes = { "test-api" }
+                    AllowedScopes = { "test-api" }//приложение получает доступы к этому скопу api используя свои ClientCredentials
                 },
-                new Client
+                new Client//с помощью этого сервера можем аутентифицироваться и получить доступ к OpenId и Profile пользователя.
                 {
                     ClientId = "mvc",
                     ClientSecrets = { new Secret("secret".Sha256()) },
 
-                    AllowedGrantTypes = GrantTypes.Code,
+                    AllowedGrantTypes = GrantTypes.Code,//возвращаем авторизационный код, говорит куда редиректить
 
                     // where to redirect to after login
                     RedirectUris = { "https://localhost:7120/signin-oidc" },

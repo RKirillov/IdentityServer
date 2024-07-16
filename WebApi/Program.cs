@@ -39,7 +39,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseRouting();
-
+//I enabled authentication in the Configure method:
 app.UseAuthentication();
 app.UseAuthorization();
 

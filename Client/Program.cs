@@ -3,7 +3,8 @@ using IdentityModel.Client;
 using Newtonsoft.Json.Linq;
 
 var client = new HttpClient();
-//ждай настройку идентити сервера
+//дай настройку идентити сервера, больше про авторизацию чтобы получить доступ к api.
+//GetDiscoveryDocumentAsync - описывает открытую конфигурацию IS
 var disco = await client.GetDiscoveryDocumentAsync("https://localhost:5001");
 if (disco.IsError)
 {
