@@ -7,8 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-//кто запрашивает
-builder.Services.AddAuthentication("Bearer")
+//будем использовать Bearer Jwt Token, настройка указывает на Identity Srever
+//аутентификация по токену - понимаем кто запрашивает
+builder.Services.AddAuthentication("с")
     //указываем используемый identity server
             .AddJwtBearer("Bearer", options =>
             {
@@ -20,7 +21,7 @@ builder.Services.AddAuthentication("Bearer")
                 };
             });
 //проверка к каким скопам он имеет права, тот кто запрашивает.
-// проверка токена от клиента
+//проверка токена от клиента
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("ApiScope", policy =>

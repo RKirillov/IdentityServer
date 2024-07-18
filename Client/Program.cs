@@ -17,6 +17,7 @@ if (disco.IsError)
 var tokenResponse = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
 {
     //прописан в config.cs identity serverа, список клиентов
+    //где то сохранять???
     Address = disco.TokenEndpoint,
     ClientId = "first-client",
     ClientSecret = "secret",

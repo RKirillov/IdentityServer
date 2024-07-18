@@ -30,7 +30,7 @@ namespace IdentityServer
                 new Client
                 {
                     ClientId = "first-client",
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,//ClientCredentials- передаст ClientId, ClientSecrets
                     ClientSecrets = { new Secret("secret".Sha256())},
                     AllowedScopes = { "test-api" }//приложение получает доступы к этому скопу api используя свои ClientCredentials
                 },
