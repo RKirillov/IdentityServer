@@ -9,8 +9,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 //будем использовать Bearer Jwt Token, настройка указывает на Identity Srever
 //аутентификация по токену - понимаем кто запрашивает
-builder.Services.AddAuthentication("с")
-    //указываем используемый identity server
+builder.Services.AddAuthentication("Bearer")
+            //указываем используемый identity server
             .AddJwtBearer("Bearer", options =>
             {
                 options.Authority = "https://localhost:5001";

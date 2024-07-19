@@ -25,6 +25,8 @@ namespace IdentityServer
         {
             services.AddControllersWithViews();
             //скорее про авториазция
+            // Add the necessary services for IdentityServer4
+            //https://identityserver4.readthedocs.io/en/latest/quickstarts/5_entityframework.html
             var builder = services.AddIdentityServer()
                 .AddInMemoryIdentityResources(Config.IdentityResources)
                 .AddInMemoryApiScopes(Config.ApiScopes)
@@ -34,6 +36,7 @@ namespace IdentityServer
             // not recommended for production - you need to store your key material somewhere secure
             builder.AddDeveloperSigningCredential();
             //аутентификация часть openid connect
+            // Add the necessary authentication middleware
             services.AddAuthentication()
                 //через гугл
                 .AddGoogle("Google", options =>
@@ -70,11 +73,12 @@ namespace IdentityServer
                 app.UseDeveloperExceptionPage();
             }
 
-           app.UseStaticFiles();
+            app.UseStaticFiles();
             app.UseRouting();
-            
-            app.UseIdentityServer();
 
+            app.UseIdentityServer();
+            // Use the necessary middleware for authentication and authorization
+            //app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
