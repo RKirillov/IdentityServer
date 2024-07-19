@@ -43,7 +43,7 @@ namespace IdentityServer
                 {
                     options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
 
-                    options.ClientId = "<insert here>";//пойти в гугл консоль, зарегить свое приложение, секюрно сюда вставить
+                    options.ClientId = "<insert here>";//пойти в гугл консоль, зарегить свое приложение, секьюрно сюда вставить
                     options.ClientSecret = "<insert here>";
                 })
                 //свой собственный identity сервер
